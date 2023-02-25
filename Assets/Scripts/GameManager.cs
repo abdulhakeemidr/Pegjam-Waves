@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +20,9 @@ public class GameManager : MonoBehaviour
     private const int EnemiesPerWave = 100;
 
     public GameObject prefabEnemy;
-    public PlayerUnit player; 
+    public GameObject prefabPlayer;
+
+    private PlayerUnit _player;
 
     void Start()
     {
@@ -26,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     private void RestartGame()
     {
+        if (_player != null) Destroy(_player.gameObject);
+        SpawnPlayer();
+        
         _currRound = 1;
         StartCoroutine(StartRound());
     }
@@ -38,14 +46,14 @@ public class GameManager : MonoBehaviour
         conductor.LoadSong(new Song(roundSongs[_currRound - 1 % roundSongs.Count], 120));
         conductor.Play();
 
-        while (player.IsAlive && _remainingEnemies > 0)
+        while (_player.IsAlive && _remainingEnemies > 0)
         {
             yield return new WaitForSeconds(1000);
             
             // TODO: Spawn enemies on interval... update _remainingEnemies on enemy death
         }
 
-        if (_currRound <= NumRounds && player.IsAlive)
+        if (_currRound <= NumRounds && _player.IsAlive)
         {
             yield return ui.EndRound(_currRound);
             _currRound += 1;
@@ -53,10 +61,16 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (!player.IsAlive)
+            if (!_player.IsAlive)
                 yield return ui.ShowGameOver();
             
             RestartGame();
         }
+    }
+
+    private void SpawnPlayer()
+    {
+        var objPlayer = Instantiate(prefabPlayer, new Vector3(0.5f, 0.5f, 0.0f), Quaternion.identity);
+        _player = objPlayer.GetComponent<PlayerUnit>();
     }
 }
