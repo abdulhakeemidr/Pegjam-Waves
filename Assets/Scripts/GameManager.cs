@@ -43,12 +43,12 @@ public class GameManager : MonoBehaviour
         yield return ui.StartRound(_currRound);
         _remainingEnemies = EnemiesPerWave;
         
-        conductor.LoadSong(new Song(roundSongs[_currRound - 1 % roundSongs.Count], 120));
+        conductor.LoadSong(new Song(roundSongs[(_currRound - 1) % roundSongs.Count], 120));
         conductor.Play();
 
         while (_player.IsAlive && _remainingEnemies > 0)
         {
-            yield return new WaitForSeconds(1000);
+            yield return new WaitForSeconds(1);
             
             // TODO: Spawn enemies on interval... update _remainingEnemies on enemy death
         }
