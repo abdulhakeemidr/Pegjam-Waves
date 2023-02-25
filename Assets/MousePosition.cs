@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class MousePosition : MonoBehaviour
 {
-    [SerializeField] Vector2 mousePosition;
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

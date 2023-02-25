@@ -15,6 +15,7 @@ public class EnemyAI : BeatResponder
     {
         base.Start();
         timeLeft = moveTime;
+        endPosition = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -32,7 +33,7 @@ public class EnemyAI : BeatResponder
     public override void OnBeat()
     {
         interval = true;
-
+        Debug.Log("Move");
     }
 
     private void MoveOnUpdateInterval()

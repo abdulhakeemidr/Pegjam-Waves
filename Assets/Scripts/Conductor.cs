@@ -21,11 +21,12 @@ public class Conductor : MonoBehaviour
     {
         _music = GetComponent<AudioSource>();
         _music.loop = true;
+        _music.Stop();
     }
 
     void Update()
     {
-        if (_music.isPlaying)
+        if (_music.isPlaying && _currentSong != null)
         {
             // Determine where we are in the song time using the audio system's timing:
             // https://docs.unity3d.com/ScriptReference/AudioSettings-dspTime.html
