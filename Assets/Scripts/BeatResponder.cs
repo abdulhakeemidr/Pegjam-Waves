@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BeatResponder : MonoBehaviour
 {
     [SerializeField]
-    private Conductor _conductor;
+    protected Conductor _conductor;
     private bool _isInitialized = false;
     void Update()
     {
