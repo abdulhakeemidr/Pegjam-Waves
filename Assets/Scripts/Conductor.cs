@@ -61,6 +61,5 @@ public class Conductor : MonoBehaviour
     {
         _music.Play();
         _dspStartTime = (float) AudioSettings.dspTime;
-        Debug.Log("START: " + _dspStartTime);
     }
 }
