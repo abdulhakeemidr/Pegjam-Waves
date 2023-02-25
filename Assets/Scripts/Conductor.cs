@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,17 +11,23 @@ public class Conductor : MonoBehaviour
     private Song _currentSong;
     private float _songPosition = 0;
     private float _dspStartTime = 0;
+    private int _prevBeat = 0;
+    
+    [SerializeField]
+    public List<AudioClip> Clips = new List<AudioClip>(); // FIXME: Need a better way to manage tracks for levels
     
     public bool Playing { get => _music.isPlaying; }
     public float BeatPosition { get; private set; }
+    public int CurrBeat { get; private set; }
     public float BeatOffset { get; private set; }
+    public 
 
     void Start()
     {
         _music = GetComponent<AudioSource>();
-        if (!_music) throw new Exception("Conductor requires an AudioSource");
-
         _music.loop = true;
+        LoadSong(new Song(Clips[0], 120)); // FIXME: Related to above, assumes Clips[0] exists and is 120...
+        Play();
     }
 
     void Update()
@@ -32,11 +39,13 @@ public class Conductor : MonoBehaviour
             _songPosition = (float) AudioSettings.dspTime - _dspStartTime;
 
             BeatPosition = _songPosition / _currentSong.SecondsPerBeat;
-            BeatOffset = BeatPosition - (float) Math.Round(BeatPosition);
+            CurrBeat = (int) Math.Round(BeatPosition);
+            BeatOffset = BeatPosition - CurrBeat;
             
             // Emit an "onBeat" message when we're on the beat ♪ 
-            if (BeatPosition % 1 == 0)
+            if (BeatOffset > 0 && _prevBeat != CurrBeat)
             {
+                _prevBeat = CurrBeat;
                 onBeat.Invoke();
             }
         }
@@ -51,6 +60,7 @@ public class Conductor : MonoBehaviour
     public void Play()
     {
         _music.Play();
-        _dspStartTime = (float)AudioSettings.dspTime;
+        _dspStartTime = (float) AudioSettings.dspTime;
+        Debug.Log("START: " + _dspStartTime);
     }
 }
