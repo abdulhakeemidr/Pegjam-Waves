@@ -5,30 +5,34 @@ using UnityEngine;
 public class EnemyAI : BeatResponder
 {
     [SerializeField] private Transform endPosition;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private float speed = 10f;
     private float timeLeft;
     private bool interval = true;
     private float pauseTime = 0.5f;
-    private float playTime = 0.2f;
+    [SerializeField] private float moveTime = 0.1f;
 
-    public Vector3 _direction = Vector3.left;
-    private int _speed = 4;
-    
-    public override void OnBeat()
+    public override void Start()
     {
-        _direction = _direction == Vector3.left ? Vector3.right : Vector3.left;
-        transform.position += _direction * _speed;
-    }
-
-    void Start()
-    {
-        timeLeft = playTime;
+        base.Start();
+        timeLeft = moveTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(interval) 
+        {
+            Vector3 moveDir = (endPosition.position - transform.position).normalized;
+            transform.position += moveDir * Time.deltaTime * speed;
+
+            Timer(moveTime);
+        }
+    }
+
+    public override void OnBeat()
+    {
+        interval = true;
+
     }
 
     private void MoveOnUpdateInterval()
@@ -42,7 +46,7 @@ public class EnemyAI : BeatResponder
         }
         else
         {
-            Timer(playTime);
+            Timer(moveTime);
         }
     }
 
@@ -52,16 +56,7 @@ public class EnemyAI : BeatResponder
         if(timeLeft < 0f)
         {
             interval = !interval;
-            Debug.Log(interval);
             timeLeft = time;
-        }
-    }
-
-    public IEnumerator Change()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(2f);
         }
     }
 }

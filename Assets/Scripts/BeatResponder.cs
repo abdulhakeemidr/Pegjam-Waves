@@ -6,15 +6,13 @@ public abstract class BeatResponder : MonoBehaviour
 {
     [SerializeField]
     protected Conductor _conductor;
-    private bool _isInitialized = false;
-    void Update()
+    public virtual void Start()
     {
         _conductor = FindObjectOfType<Conductor>();
 
-        if (_conductor && !_isInitialized)
+        if (_conductor)
         {
             _conductor.onBeat.AddListener(OnBeat);
-            _isInitialized = true;
         }
     }
 

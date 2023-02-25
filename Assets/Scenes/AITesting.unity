@@ -778,7 +778,7 @@ MonoBehaviour:
   _conductor: {fileID: 0}
   endPosition: {fileID: 413356208}
   speed: 10
-  _direction: {x: -1, y: 0, z: 0}
+  playTime: 0.1
 --- !u!58 &1566879468
 CircleCollider2D:
   m_ObjectHideFlags: 0
