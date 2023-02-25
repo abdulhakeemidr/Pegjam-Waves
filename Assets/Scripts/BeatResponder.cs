@@ -4,14 +4,17 @@ using UnityEngine;
 
 public abstract class BeatResponder : MonoBehaviour
 {
+    [SerializeField]
     private Conductor _conductor;
-    void Start()
+    private bool _isInitialized = false;
+    void Update()
     {
         _conductor = FindObjectOfType<Conductor>();
 
-        if (_conductor)
+        if (_conductor && !_isInitialized)
         {
             _conductor.onBeat.AddListener(OnBeat);
+            _isInitialized = true;
         }
     }
 
