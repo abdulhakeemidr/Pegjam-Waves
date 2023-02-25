@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    
     private Vector3 mousePos;
     public Vector3 up = Vector3.up;
 
@@ -13,11 +13,10 @@ public class PlayerController : MonoBehaviour
     public GameObject hold;
 
     public Vector3 aimVector = Vector3.up;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame

@@ -16,24 +16,34 @@ public class InterfaceManager : MonoBehaviour
     public IEnumerator StartRound(int round)
     {
         txtRound.text = "WAVE " + round + " START!";
-        yield return StartCoroutine(ShowRoundText());
-        yield return StartCoroutine(FadeRoundText(3000));
+        yield return StartCoroutine(ShowMainText());
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(FadeMainText(1));
     }
 
     public IEnumerator EndRound(int round)
     {
         txtRound.text = "WAVE " + round + "CLEARED";
-        yield return StartCoroutine(ShowRoundText());
-        yield return StartCoroutine(FadeRoundText(3000));
+        yield return StartCoroutine(ShowMainText());
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(FadeMainText(1));
     }
 
-    private IEnumerator ShowRoundText()
+    public IEnumerator ShowGameOver()
+    {
+        txtRound.text = "GAME OVER";
+        yield return StartCoroutine(ShowMainText());
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(FadeMainText(1));
+    }
+
+    private IEnumerator ShowMainText()
     {
         canvasGroup.alpha = 1f;
         yield return null;
     }
     
-    private IEnumerator FadeRoundText(float duration)
+    private IEnumerator FadeMainText(float duration)
     {
         float startAlpha = canvasGroup.alpha;
         float timeElapsed = 0f;
