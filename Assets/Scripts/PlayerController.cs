@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 up = Vector3.up;
 
     public Vector3 playerPosition = new Vector3(0.5f, 0.5f, 0.0f);
+    public float runSpeed = 5.0f;
     public Weapon equippedWeapon;
     public GameObject hold;
 
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f).normalized;
         Vector3 screenPos = Input.mousePosition;
         aimVector = new Vector3(screenPos.x - playerPosition.x * Screen.width, screenPos.y - playerPosition.y * Screen.height, playerPosition.z);
         Vector3 direction = mousePos - transform.position;
@@ -36,5 +37,6 @@ public class PlayerController : MonoBehaviour
         {
             equippedWeapon.shoot(aimVector);
         }
+        transform.Translate(movement * runSpeed * Time.deltaTime);
     }
 }
