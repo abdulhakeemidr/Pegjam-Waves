@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
         
 
         hold.transform.rotation = Quaternion.FromToRotation(Vector3.up, aimVector);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            equippedWeapon.shoot(aimVector);
+        }
         
     }
 }

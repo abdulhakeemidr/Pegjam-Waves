@@ -7,10 +7,11 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject projectile;
-    public Vector3 muzzlePosition = Vector3.zero;
+    public GameObject muzzlePosition;
 
     //The amount of time (seconds) that it takes before you can shoot again;
     public float loadDelay = 0.25f;
+    
     [SerializeField] bool readyToShoot = true;
 
     void Start()
@@ -28,8 +29,11 @@ public class Weapon : MonoBehaviour
     {
         if (readyToShoot)
         {
-            //instantiate projectile at muzzle position
-
+            GameObject bullet = Instantiate(projectile, (muzzlePosition.transform.position), projectile.transform.rotation);
+            bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, aim);
+            bullet.transform.Rotate(Vector3.forward, 90.0f);
+            bullet.SetActive(true);
+            StartCoroutine(CoolDown());
         }
     }
 
@@ -39,4 +43,6 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(loadDelay);
         readyToShoot = true;
     }
+
+    
 }
