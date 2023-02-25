@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
         while (player.IsAlive && _remainingEnemies > 0)
         {
             yield return new WaitForSeconds(1000);
+            
+            // TODO: Spawn enemies on interval... update _remainingEnemies on enemy death
         }
 
         if (_currRound <= NumRounds && player.IsAlive)
