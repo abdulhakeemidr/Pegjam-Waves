@@ -13,10 +13,6 @@ public class Conductor : MonoBehaviour
     private float _dspStartTime = 0;
     private int _prevBeat = 0;
     
-    [SerializeField]
-    public List<AudioClip> Clips = new List<AudioClip>(); // FIXME: Need a better way to manage tracks for levels
-    
-    public bool Playing { get => _music.isPlaying; }
     public float BeatPosition { get; private set; }
     public int CurrBeat { get; private set; }
     public float BeatOffset { get; private set; }
@@ -25,8 +21,6 @@ public class Conductor : MonoBehaviour
     {
         _music = GetComponent<AudioSource>();
         _music.loop = true;
-        LoadSong(new Song(Clips[0], 120)); // FIXME: Related to above, assumes Clips[0] exists and is 120...
-        Play();
     }
 
     void Update()
