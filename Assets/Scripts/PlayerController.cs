@@ -37,6 +37,5 @@ public class PlayerController : MonoBehaviour
         {
             equippedWeapon.shoot(aimVector);
         }
-        
     }
 }
