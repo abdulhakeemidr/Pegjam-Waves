@@ -20,7 +20,6 @@ public class Conductor : MonoBehaviour
     public float BeatPosition { get; private set; }
     public int CurrBeat { get; private set; }
     public float BeatOffset { get; private set; }
-    public 
 
     void Start()
     {
