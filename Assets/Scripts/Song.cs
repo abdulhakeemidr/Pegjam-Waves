@@ -7,10 +7,9 @@ public class Song
     public int Bpm { get; }
     public float SecondsPerBeat { get; }
 
-    public Song(string fileName, int bpm)
+    public Song(AudioClip clip, int bpm)
     {
-        Clip = Resources.Load<AudioClip>(fileName);
-        
+        Clip = clip;
         Bpm = bpm;
         SecondsPerBeat = 60f / bpm;
     }
