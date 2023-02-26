@@ -2,12 +2,36 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InterfaceManager : MonoBehaviour
+public class InterfaceManager : BeatResponder
 {
+    public GameObject objHeart;
     public Text txtHealth;
     public Text txtRound;
     public CanvasGroup canvasGroup;
 
+    public override void OnBeat()
+    {
+        StartCoroutine(PulseHeart());
+    }
+
+    private IEnumerator PulseHeart()
+    {
+        Vector3 initialScale = objHeart.transform.localScale;
+        float currentTime = 0f;
+        float duration = 0.25f;
+        Vector3 targetScale = new Vector3(1.25f, 1.25f, 1.25f);
+    
+        while (currentTime < duration)
+        {
+            objHeart.transform.localScale = Vector3.Lerp(initialScale, targetScale, currentTime / duration);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+
+        objHeart.transform.localScale = initialScale;
+        yield return null;
+    }
+    
     public void UpdateHealth(int health)
     {
         txtHealth.text = health.ToString();
