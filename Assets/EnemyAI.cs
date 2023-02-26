@@ -69,7 +69,7 @@ public class EnemyAI : BeatResponder
     {
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player collision");
+            other.gameObject.GetComponent<Unit>().TakeDamage(100);
             animator.SetTrigger("Explosion");
             //Destroy(gameObject);
             Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);

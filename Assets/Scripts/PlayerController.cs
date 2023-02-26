@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float synchronisty = 0.5f;
 
     private Conductor conductor;
+    private Unit _unit;
 
     // Start is called before the first frame update
     void Start()
@@ -25,25 +26,31 @@ public class PlayerController : MonoBehaviour
         GameObject camera = Camera.main.gameObject;
         CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
         cameraFollow.target = gameObject;
+        _unit = GetComponent<Unit>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f).normalized;
-        Vector3 screenPos = Input.mousePosition;
-        aimVector = new Vector3(screenPos.x - playerPosition.x * Screen.width, screenPos.y - playerPosition.y * Screen.height, playerPosition.z);
-        Vector3 direction = mousePos - transform.position;
-
-        gameObject.GetComponent<SpriteRenderer>().flipX = (aimVector.x < 0);
-        
-
-        hold.transform.rotation = Quaternion.FromToRotation(Vector3.up, aimVector);
-
-        if (Input.GetMouseButtonDown(0))
+        if (_unit.IsAlive)
         {
-            equippedWeapon.shoot(aimVector, conductor.BeatOffset + 0.5f);
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f).normalized;
+            Vector3 screenPos = Input.mousePosition;
+            aimVector = new Vector3(screenPos.x - playerPosition.x * Screen.width,
+                screenPos.y - playerPosition.y * Screen.height, playerPosition.z);
+            Vector3 direction = mousePos - transform.position;
+
+            gameObject.GetComponent<SpriteRenderer>().flipX = (aimVector.x < 0);
+
+
+            hold.transform.rotation = Quaternion.FromToRotation(Vector3.up, aimVector);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                equippedWeapon.shoot(aimVector, conductor.BeatOffset + 0.5f);
+            }
+
+            transform.Translate(movement * runSpeed * Time.deltaTime);
         }
-        transform.Translate(movement * runSpeed * Time.deltaTime);
     }
 }
