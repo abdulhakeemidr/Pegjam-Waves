@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
     private int _currRound = 0;
     private const int NumRounds = 10;
     private int _remainingEnemies = 0;
-    private int _enemiesSpawned = 0;
+    [SerializeField] private int _enemiesSpawned = 0;
     private const int EnemiesPerWave = 100;
 
     public GameObject prefabEnemy;
     public GameObject prefabPlayer;
 
     private PlayerUnit _player;
+    public EnemySpawner spawnEnemies;
 
     void Start()
     {
@@ -48,9 +49,9 @@ public class GameManager : MonoBehaviour
 
         while (_player.IsAlive && _remainingEnemies > 0)
         {
-            yield return new WaitForSeconds(1);
-            
             // TODO: Spawn enemies on interval... update _remainingEnemies on enemy death
+            spawnEnemies.Spawn();
+            yield return new WaitForSeconds(10);
         }
 
         if (_currRound <= NumRounds && _player.IsAlive)

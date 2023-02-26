@@ -33,7 +33,6 @@ public class EnemyAI : BeatResponder
     public override void OnBeat()
     {
         interval = true;
-        Debug.Log("Move");
     }
 
     private void MoveOnUpdateInterval()
@@ -58,6 +57,14 @@ public class EnemyAI : BeatResponder
         {
             interval = !interval;
             timeLeft = time;
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("Player collision");
         }
     }
 }

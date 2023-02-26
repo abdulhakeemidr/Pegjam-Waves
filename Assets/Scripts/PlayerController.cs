@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject camera = Camera.main.gameObject;
+        CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
+        cameraFollow.target = gameObject;
     }
 
     // Update is called once per frame
