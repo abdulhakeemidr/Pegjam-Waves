@@ -6,6 +6,7 @@ public class InterfaceManager : BeatResponder
 {
     public GameObject objHeart;
     public Text txtHealth;
+    public Text txtKills;
     public Text txtRound;
     public CanvasGroup canvasGroup;
 
@@ -35,6 +36,11 @@ public class InterfaceManager : BeatResponder
     public void UpdateHealth(int health)
     {
         txtHealth.text = health.ToString();
+    }
+
+    public void UpdateEnemiesKilled(int kills)
+    {
+        txtKills.text = kills.ToString();
     }
 
     public IEnumerator StartRound(int round)

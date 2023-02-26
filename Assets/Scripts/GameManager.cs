@@ -20,9 +20,9 @@ public class GameManager : MonoBehaviour
         
     private int _currRound = 0;
     private const int NumRounds = 10;
-    private int _remainingEnemies = 0;
-    [SerializeField] private int _enemiesSpawned = 0;
-    private const int EnemiesPerWave = 100;
+    private int _remainingEnemies = 10;
+    public int EnemiesSpawned = 0;
+    public int EnemiesPerWave = 10;
 
     public GameObject prefabEnemy;
     public GameObject prefabPlayer;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         ui.UpdateHealth(_player.health <= 0 ? 0 : _player.health);
+        ui.UpdateEnemiesKilled(EnemiesPerWave - _remainingEnemies);
     }
 
     private void RestartGame()
@@ -80,6 +81,12 @@ public class GameManager : MonoBehaviour
             
             SceneManager.LoadScene("StartScene");
         }
+    }
+
+    public void ReduceRemainingEnemies()
+    {
+        _remainingEnemies -= 1;
+        if (_remainingEnemies < 0) _remainingEnemies = 0;
     }
 
     private void SpawnPlayer()

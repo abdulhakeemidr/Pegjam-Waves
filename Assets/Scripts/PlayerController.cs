@@ -48,10 +48,10 @@ public class PlayerController : MonoBehaviour
 
             // Move the GameObject based on input and current speed
             transform.position += new Vector3(horizontalInput, verticalInput, 0) * currSpeed * Time.deltaTime;
-            
+            Vector3 cameraCoords = Camera.main.WorldToScreenPoint(transform.position);
             Vector3 screenPos = Input.mousePosition;
-            aimVector = new Vector3(screenPos.x - playerPosition.x * Screen.width,
-                screenPos.y - playerPosition.y * Screen.height, playerPosition.z);
+            aimVector = new Vector3(screenPos.x - cameraCoords.x,
+                screenPos.y - cameraCoords.y, playerPosition.z);
             gameObject.GetComponent<SpriteRenderer>().flipX = (aimVector.x < 0);
             hold.transform.rotation = Quaternion.FromToRotation(Vector3.up, aimVector);
 

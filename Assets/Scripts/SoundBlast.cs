@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SoundBlast : MonoBehaviour
 {
-
     public float speed = 50.0f;
     public float lifeTime = 0.5f;
     public int minDamage = 1;
@@ -55,6 +54,14 @@ public class SoundBlast : MonoBehaviour
         {
             Unit unit = collision.gameObject.GetComponent<Unit>();
             unit.TakeDamage(damage);
+
+            if (!unit.IsAlive)
+            {
+                collision.gameObject.GetComponent<EnemyAI>().animator.SetTrigger("Explosion");
+                Destroy(collision.gameObject,
+                    collision.gameObject.GetComponent<EnemyAI>().animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
+                FindObjectOfType<GameManager>().ReduceRemainingEnemies();
+            }
         }
         CleanUp();
     }

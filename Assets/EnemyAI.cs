@@ -12,7 +12,7 @@ public class EnemyAI : BeatResponder
     private float pauseTime = 0.5f;
     [SerializeField] private float moveTime = 0.1f;
 
-    private Animator animator;
+    public Animator animator;
 
     public override void Start()
     {
@@ -73,6 +73,7 @@ public class EnemyAI : BeatResponder
             animator.SetTrigger("Explosion");
             //Destroy(gameObject);
             Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
+            FindObjectOfType<GameManager>().ReduceRemainingEnemies();
         }
     }
 

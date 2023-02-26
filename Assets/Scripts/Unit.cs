@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("Taking Damage: " + damage);
         health -= damage;
     }
 }
