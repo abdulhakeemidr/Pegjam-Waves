@@ -12,11 +12,15 @@ public class EnemyAI : BeatResponder
     private float pauseTime = 0.5f;
     [SerializeField] private float moveTime = 0.1f;
 
+    private Animator animator;
+
     public override void Start()
     {
         base.Start();
         timeLeft = moveTime;
         endPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        //animationComponent.clip.AddEvent(new AnimationEvent { time = animationComponent.clip.length, functionReference = new Object(), functionName = "RemoveGameObject" });
     }
 
     // Update is called once per frame
@@ -66,8 +70,14 @@ public class EnemyAI : BeatResponder
         if(other.gameObject.CompareTag("Player"))
         {
             Debug.Log("player collision");
-            Instantiate(explosionVFX, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            animator.SetTrigger("Explosion");
+            //Destroy(gameObject);
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 0f);
         }
+    }
+
+    private void OnDestroy() 
+    {
+        Instantiate(explosionVFX, transform.position, Quaternion.identity);
     }
 }
