@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     
     [SerializeField]
     public List<AudioClip> roundSongs = new List<AudioClip>();
+    public List<int> roundBpm = new List<int>();
+
+    public List<Sprite> roundSprites = new List<Sprite>();
+    public SpriteRenderer background; 
         
     private int _currRound = 0;
     private const int NumRounds = 10;
@@ -23,7 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject prefabEnemy;
     public GameObject prefabPlayer;
 
-    private PlayerUnit _player;
+    private Unit _player;
     public EnemySpawner spawnEnemies;
 
     void Start()
@@ -42,10 +46,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartRound()
     {
+        var assetIndex = (_currRound - 1) % roundSongs.Count;
+        background.sprite = roundSprites[assetIndex];
+
         yield return ui.StartRound(_currRound);
         _remainingEnemies = EnemiesPerWave;
-        
-        conductor.LoadSong(new Song(roundSongs[(_currRound - 1) % roundSongs.Count], 120));
+
+        conductor.LoadSong(new Song(roundSongs[assetIndex], 120));
         conductor.Play();
 
         while (_player.IsAlive && _remainingEnemies > 0)
@@ -73,6 +80,6 @@ public class GameManager : MonoBehaviour
     private void SpawnPlayer()
     {
         var objPlayer = Instantiate(prefabPlayer, new Vector3(0.5f, 0.5f, 0.0f), Quaternion.identity);
-        _player = objPlayer.GetComponent<PlayerUnit>();
+        _player = objPlayer.GetComponent<Unit>();
     }
 }

@@ -240,7 +240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.6, y: -2.800003}
+  m_AnchoredPosition: {x: 122.600006, y: -2.800003}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &164521225
@@ -753,6 +753,12 @@ MonoBehaviour:
   conductor: {fileID: 910025616}
   roundSongs:
   - {fileID: 8300000, guid: 1bfb90cfc7fa2b24a9e347f64714125e, type: 3}
+  - {fileID: 8300000, guid: 4e4871b1ce65843b39aca36416357d39, type: 3}
+  roundBpm: 780000008c000000
+  roundSprites:
+  - {fileID: 21300000, guid: a49caab7964fde7479177f0f0df74031, type: 3}
+  - {fileID: 21300000, guid: c42372d2e1fca48b98c9cb01d13bb6cd, type: 3}
+  background: {fileID: 1731904312}
   _enemiesSpawned: 0
   prefabEnemy: {fileID: 5704765459418936200, guid: be043ae6efb4c0345b112c513694f205, type: 3}
   prefabPlayer: {fileID: 1006250336844311113, guid: e66159e38ddcdae408d45afe69107cef, type: 3}
