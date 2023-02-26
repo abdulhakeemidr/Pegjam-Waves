@@ -6,6 +6,7 @@ public class EnemyAI : BeatResponder
 {
     [SerializeField] private Transform endPosition;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private GameObject explosionVFX;
     private float timeLeft;
     private bool interval = true;
     private float pauseTime = 0.5f;
@@ -60,11 +61,13 @@ public class EnemyAI : BeatResponder
         }
     }
 
-    private void OnCollisionEnter(Collision other) 
+    private void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player collision");
+            Debug.Log("player collision");
+            Instantiate(explosionVFX, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }

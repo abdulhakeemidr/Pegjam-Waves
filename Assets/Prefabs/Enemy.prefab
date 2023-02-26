@@ -115,4 +115,5 @@ MonoBehaviour:
   _conductor: {fileID: 0}
   endPosition: {fileID: 0}
   speed: 10
+  explosionVFX: {fileID: 4076960027117662100, guid: c87c17eb955a31344b46e83b823c5e56, type: 3}
   moveTime: 0.1
