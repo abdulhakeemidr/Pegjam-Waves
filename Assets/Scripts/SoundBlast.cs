@@ -53,12 +53,10 @@ public class SoundBlast : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            //Deal damage to enemy
+            Unit unit = collision.gameObject.GetComponent<Unit>();
+            unit.TakeDamage(damage);
         }
-        else
-        {
-            CleanUp();
-        }
+        CleanUp();
     }
 
 }
