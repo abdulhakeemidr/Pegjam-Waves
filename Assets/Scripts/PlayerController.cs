@@ -23,9 +23,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         conductor = GameObject.Find("Conductor").GetComponent<Conductor>();
-        GameObject camera = Camera.main.gameObject;
-        CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
-        cameraFollow.target = gameObject;
         _unit = GetComponent<Unit>();
     }
 

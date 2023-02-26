@@ -359,6 +359,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0339c8355b245f49e0610cda6d622a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _conductor: {fileID: 910025616}
+  objHeart: {fileID: 1618612369}
   txtHealth: {fileID: 643977438}
   txtRound: {fileID: 1517036680}
   canvasGroup: {fileID: 1517036681}
@@ -391,6 +393,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ce7ec4a05af7847b16b423a3412b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _conductor: {fileID: 0}
   enemyPrefab: {fileID: 5704765459418936200, guid: be043ae6efb4c0345b112c513694f205, type: 3}
   distanceFromEdge: 1
 --- !u!4 &601359045
@@ -441,7 +444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -2.26, y: 0.059}
+  m_AnchoredPosition: {x: -2.26, y: 0.056}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &643977438
