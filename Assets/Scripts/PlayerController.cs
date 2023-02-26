@@ -14,10 +14,14 @@ public class PlayerController : MonoBehaviour
     public GameObject hold;
 
     public Vector3 aimVector = Vector3.up;
-    
+    public float synchronisty = 0.5f;
+
+    private Conductor conductor;
+
     // Start is called before the first frame update
     void Start()
     {
+        conductor = GameObject.Find("Conductor").GetComponent<Conductor>();
         GameObject camera = Camera.main.gameObject;
         CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
         cameraFollow.target = gameObject;
@@ -38,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            equippedWeapon.shoot(aimVector);
+            equippedWeapon.shoot(aimVector, conductor.BeatOffset + 0.5f);
         }
         transform.Translate(movement * runSpeed * Time.deltaTime);
     }

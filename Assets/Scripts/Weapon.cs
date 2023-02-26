@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
 
     //The amount of time (seconds) that it takes before you can shoot again;
     public float loadDelay = 0.25f;
+
     
     [SerializeField] bool readyToShoot = true;
 
@@ -25,13 +26,15 @@ public class Weapon : MonoBehaviour
         
     }
 
-    public void shoot(Vector3 aim)
+    //Resonance is a float value representing how well timed the shot
+    public void shoot(Vector3 aim, float resonance)
     {
         if (readyToShoot)
         {
             GameObject bullet = Instantiate(projectile, (muzzlePosition.transform.position), projectile.transform.rotation);
             bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, aim);
             bullet.transform.Rotate(Vector3.forward, 90.0f);
+            bullet.GetComponent<SoundBlast>().AdjustPower(resonance);
             bullet.SetActive(true);
             StartCoroutine(CoolDown());
         }
