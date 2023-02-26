@@ -54,14 +54,13 @@ public class GameManager : MonoBehaviour
     {
         var assetIndex = (_currRound - 1) % roundSongs.Count;
         background.sprite = roundSprites[assetIndex];
+        conductor.LoadSong(new Song(roundSongs[assetIndex], 120));
+        conductor.Play();
 
         yield return ui.StartRound(_currRound);
         _remainingEnemies = EnemiesPerWave;
 
-        conductor.LoadSong(new Song(roundSongs[assetIndex], 120));
-        conductor.Play();
-
-        spawnEnemies.StartSpawning();
+        spawnEnemies.StartSpawning(EnemiesPerWave);
         while (_player.IsAlive && _remainingEnemies > 0)
         {
             yield return new WaitForEndOfFrame();

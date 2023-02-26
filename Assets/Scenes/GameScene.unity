@@ -758,11 +758,11 @@ MonoBehaviour:
   conductor: {fileID: 910025616}
   roundSongs:
   - {fileID: 8300000, guid: 1bfb90cfc7fa2b24a9e347f64714125e, type: 3}
-  - {fileID: 8300000, guid: 4e4871b1ce65843b39aca36416357d39, type: 3}
+  - {fileID: 8300000, guid: 56c174184c267a04e80caf9ca3b1bff6, type: 3}
   roundBpm: 780000008c000000
   roundSprites:
   - {fileID: 21300000, guid: a49caab7964fde7479177f0f0df74031, type: 3}
-  - {fileID: 21300000, guid: c42372d2e1fca48b98c9cb01d13bb6cd, type: 3}
+  - {fileID: 21300000, guid: 785e0cca1ad82424faface0cb005f960, type: 3}
   background: {fileID: 1731904312}
   EnemiesSpawned: 0
   EnemiesPerWave: 10

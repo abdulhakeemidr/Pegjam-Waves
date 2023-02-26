@@ -7,18 +7,21 @@ public class EnemySpawner : BeatResponder
     [SerializeField] private GameObject enemyPrefab;
     public float distanceFromEdge = 1f; //distance of the object from the edge of the screen
     private bool isSpawning = false;
+    private int numEnemies = 0;
 
     public override void OnBeat()
     {
-        if (isSpawning && _conductor.CurrBeat % 4 == 0)
+        if (isSpawning && _conductor.CurrBeat % 4 == 0 && numEnemies > 0)
         {
             SpawnObject(RandomEdgePosition()); //spawn at a random edge
+            numEnemies -= 1;
         }
     }
 
-    public void StartSpawning()
+    public void StartSpawning(int enemies)
     {
         isSpawning = true;
+        numEnemies = enemies;
     }
 
     public void StopSpawning()
