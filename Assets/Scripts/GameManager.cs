@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
         RestartGame();
     }
 
+    void Update()
+    {
+        ui.UpdateHealth(_player.health <= 0 ? 0 : _player.health);
+    }
+
     private void RestartGame()
     {
         if (_player != null) Destroy(_player.gameObject);
@@ -55,12 +60,12 @@ public class GameManager : MonoBehaviour
         conductor.LoadSong(new Song(roundSongs[assetIndex], 120));
         conductor.Play();
 
+        spawnEnemies.StartSpawning();
         while (_player.IsAlive && _remainingEnemies > 0)
         {
-            // TODO: Spawn enemies on interval... update _remainingEnemies on enemy death
-            spawnEnemies.Spawn();
-            yield return new WaitForSeconds(10);
+            yield return new WaitForEndOfFrame();
         }
+        spawnEnemies.StopSpawning();
 
         if (_currRound <= NumRounds && _player.IsAlive)
         {

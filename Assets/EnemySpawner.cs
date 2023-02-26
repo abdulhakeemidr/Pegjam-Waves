@@ -2,14 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : BeatResponder
 {
     [SerializeField] private GameObject enemyPrefab;
     public float distanceFromEdge = 1f; //distance of the object from the edge of the screen
+    private bool isSpawning = false;
 
-    public void Spawn()
+    public override void OnBeat()
     {
-        SpawnObject(RandomEdgePosition()); //spawn at a random edge
+        if (isSpawning && _conductor.CurrBeat % 4 == 0)
+        {
+            SpawnObject(RandomEdgePosition()); //spawn at a random edge
+        }
+    }
+
+    public void StartSpawning()
+    {
+        isSpawning = true;
+    }
+
+    public void StopSpawning()
+    {
+        isSpawning = false;
     }
 
     Vector3 RandomEdgePosition()
