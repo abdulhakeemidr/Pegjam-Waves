@@ -76,8 +76,4 @@ public class EnemyAI : BeatResponder
         }
     }
 
-    private void OnDestroy() 
-    {
-        Instantiate(explosionVFX, transform.position, Quaternion.identity);
-    }
 }
