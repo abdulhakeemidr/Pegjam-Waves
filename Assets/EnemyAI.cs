@@ -72,7 +72,7 @@ public class EnemyAI : BeatResponder
             Debug.Log("player collision");
             animator.SetTrigger("Explosion");
             //Destroy(gameObject);
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 0f);
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 0.2f);
         }
     }
 
