@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 playerPosition = new Vector3(0.5f, 0.5f, 0.0f);
     public float runSpeed = 5.0f;
+    public float acceleration = 1f;
+    public float currSpeed = 0;
     public Weapon equippedWeapon;
     public GameObject hold;
 
@@ -31,23 +33,32 @@ public class PlayerController : MonoBehaviour
     {
         if (_unit.IsAlive)
         {
-            Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0.0f).normalized;
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+
+            // Calculate acceleration
+            if (horizontalInput != 0 || verticalInput != 0)
+            {
+                currSpeed = Mathf.Min(currSpeed + acceleration, runSpeed);
+            }
+            else
+            {
+                currSpeed = 0f;
+            }
+
+            // Move the GameObject based on input and current speed
+            transform.position += new Vector3(horizontalInput, verticalInput, 0) * currSpeed * Time.deltaTime;
+            
             Vector3 screenPos = Input.mousePosition;
             aimVector = new Vector3(screenPos.x - playerPosition.x * Screen.width,
                 screenPos.y - playerPosition.y * Screen.height, playerPosition.z);
-            Vector3 direction = mousePos - transform.position;
-
             gameObject.GetComponent<SpriteRenderer>().flipX = (aimVector.x < 0);
-
-
             hold.transform.rotation = Quaternion.FromToRotation(Vector3.up, aimVector);
 
             if (Input.GetMouseButtonDown(0))
             {
                 equippedWeapon.shoot(aimVector, conductor.BeatOffset + 0.5f);
             }
-
-            transform.Translate(movement * runSpeed * Time.deltaTime);
         }
     }
 }

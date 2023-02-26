@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: -3654381389103999316, guid: a05dc62063c4efc4f900b03d02595707, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,9 +133,12 @@ MonoBehaviour:
   up: {x: 0, y: 1, z: 0}
   playerPosition: {x: 0.5, y: 0.5, z: 0}
   runSpeed: 5
+  acceleration: 1
+  currSpeed: 0
   equippedWeapon: {fileID: 1006250338099752825}
   hold: {fileID: 1006250337333094545}
   aimVector: {x: 0, y: 1, z: 0}
+  synchronisty: 0.5
 --- !u!58 &1006250336844311118
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -204,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200c5efe916049a797b1fdc268cfbb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1006250337333094545
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,7 +311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 8b4e7a6ce5ebf6e46915c0f7840b46bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
