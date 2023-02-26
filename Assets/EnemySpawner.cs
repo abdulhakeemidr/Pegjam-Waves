@@ -8,18 +8,23 @@ public class EnemySpawner : BeatResponder
     public float distanceFromEdge = 1f; //distance of the object from the edge of the screen
     private bool isSpawning = false;
     private int numEnemies = 0;
+    private int spawnCount = 0;
 
     public override void OnBeat()
     {
         if (isSpawning && _conductor.CurrBeat % 4 == 0 && numEnemies > 0)
         {
-            SpawnObject(RandomEdgePosition()); //spawn at a random edge
+            for (var i = 0; i < spawnCount; i += 1)
+            {
+                SpawnObject(RandomEdgePosition()); //spawn at a random edge
+            }
             numEnemies -= 1;
         }
     }
 
-    public void StartSpawning(int enemies)
+    public void StartSpawning(int enemies, int spawnCount)
     {
+        this.spawnCount = spawnCount;
         isSpawning = true;
         numEnemies = enemies;
     }

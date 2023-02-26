@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         yield return ui.StartRound(_currRound);
         _remainingEnemies = EnemiesPerWave;
 
-        spawnEnemies.StartSpawning(EnemiesPerWave);
+        spawnEnemies.StartSpawning(EnemiesPerWave, _currRound);
         while (_player.IsAlive && _remainingEnemies > 0)
         {
             yield return new WaitForEndOfFrame();

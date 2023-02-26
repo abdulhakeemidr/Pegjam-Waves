@@ -45,7 +45,7 @@ public class InterfaceManager : BeatResponder
 
     public IEnumerator StartRound(int round)
     {
-        txtRound.text = "WAVE " + round + " START!";
+        txtRound.text = "WAVE START";
         yield return StartCoroutine(ShowMainText());
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(FadeMainText(1));
@@ -53,7 +53,7 @@ public class InterfaceManager : BeatResponder
 
     public IEnumerator EndRound(int round)
     {
-        txtRound.text = "WAVE " + round + "CLEARED";
+        txtRound.text = "WAVE CLEARED";
         yield return StartCoroutine(ShowMainText());
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(FadeMainText(1));
